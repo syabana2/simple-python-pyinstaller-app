@@ -1,9 +1,11 @@
 pipeline {
-    agent none
-    triggers {
-        pollSCM('H/2 * * * *')
-    }
+    agent any
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/syabana2/simple-python-pyinstaller-app.git'
+            }
+        }
         stage('Build') {
             agent {
                 docker {
